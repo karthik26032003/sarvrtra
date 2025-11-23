@@ -9,6 +9,8 @@
 
 **Core Philosophy:** Merge the warmth of handcrafted artisan goods with the elegance of English home décor and the spiritual richness of Hindu symbolism. Create a premium, tactile digital experience that honors traditional craftsmanship.
 
+**Color Palette:** Purple/Gold/Bronze - Representing royalty, divine spirituality (purple), prosperity and warmth (gold), and artisan craftsmanship (bronze)
+
 ---
 
 ## Typography System

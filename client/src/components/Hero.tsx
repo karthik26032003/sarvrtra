@@ -6,21 +6,21 @@ export default function Hero() {
   return (
     <section className="relative h-[85vh] min-h-[600px] w-full overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        className="absolute inset-0 bg-cover bg-center transition-transform ease-out hover:scale-105"
+        style={{ backgroundImage: `url(${heroImage})`, transitionDuration: '3000ms' }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30" />
       </div>
 
       <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col justify-center h-full max-w-2xl">
-          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight animate-fade-in-up">
             Where Tradition Meets Elegance
           </h1>
-          <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl">
+          <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-xl animate-fade-in-up" style={{ animationDelay: "0.2s", opacity: 0 }}>
             Discover exquisite handcrafted artifacts in brass, bronze, and wood. Each piece celebrates Hindu spirituality and timeless artisan craftsmanship.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
             <Link href="/catalog" data-testid="link-hero-shop">
               <Button size="lg" variant="default" className="text-base">
                 Shop Collections

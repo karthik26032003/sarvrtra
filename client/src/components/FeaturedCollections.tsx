@@ -2,11 +2,13 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import brass1 from "@assets/stock_images/brass_home_decor_art_e5322683.jpg";
 import bronze1 from "@assets/stock_images/bronze_sculpture_hom_83c0c990.jpg";
 import wood1 from "@assets/stock_images/wooden_home_decor_ha_0877cd2f.jpg";
 
 export default function FeaturedCollections() {
+  const { ref, isVisible } = useScrollAnimation();
   const collections = [
     {
       id: "brass",
@@ -32,9 +34,9 @@ export default function FeaturedCollections() {
   ];
 
   return (
-    <section className="py-16 bg-background">
+    <section ref={ref as any} className="py-16 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="font-serif text-4xl font-bold mb-4">Shop by Material</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Explore our curated collections of brass, bronze, and wood artifacts
@@ -42,10 +44,13 @@ export default function FeaturedCollections() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {collections.map((collection) => (
+          {collections.map((collection, index) => (
             <Card
               key={collection.id}
-              className="group overflow-hidden hover-elevate transition-all duration-300"
+              className={`group overflow-hidden hover-elevate transition-all duration-700 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
               data-testid={`card-collection-${collection.id}`}
             >
               <Link href={collection.link}>

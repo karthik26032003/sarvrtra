@@ -5,6 +5,7 @@ import ProductCard from "@/components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 import product1 from "@assets/stock_images/brass_home_decor_art_e5322683.jpg";
 import product2 from "@assets/stock_images/brass_home_decor_art_afcd04f0.jpg";
@@ -12,6 +13,9 @@ import product3 from "@assets/stock_images/brass_home_decor_art_b9962a99.jpg";
 import product4 from "@assets/stock_images/bronze_sculpture_hom_9c0f1d31.jpg";
 
 export default function HomePage() {
+  const { ref: productsRef, isVisible: productsVisible } = useScrollAnimation();
+  const { ref: newsletterRef, isVisible: newsletterVisible } = useScrollAnimation();
+
   const featuredProducts = [
     {
       id: "1",
@@ -52,9 +56,9 @@ export default function HomePage() {
       <Hero />
       <FeaturedCollections />
       
-      <section className="py-16 bg-background">
+      <section ref={productsRef as any} className="py-16 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between mb-8">
+          <div className={`flex items-center justify-between mb-8 transition-all duration-700 ${productsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div>
               <h2 className="font-serif text-3xl font-bold mb-2">New Arrivals</h2>
               <p className="text-muted-foreground">Discover our latest handcrafted pieces</p>
@@ -68,8 +72,16 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
+            {featuredProducts.map((product, index) => (
+              <div
+                key={product.id}
+                className={`transition-all duration-700 ${
+                  productsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <ProductCard {...product} />
+              </div>
             ))}
           </div>
         </div>
@@ -77,8 +89,8 @@ export default function HomePage() {
 
       <BrandStory />
 
-      <section className="py-16 bg-primary text-primary-foreground">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section ref={newsletterRef as any} className="py-16 bg-primary text-primary-foreground">
+        <div className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-700 ${newsletterVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="font-serif text-3xl font-bold mb-4">
             Experience Sacred Artistry
           </h2>

@@ -1,8 +1,10 @@
 import { Card } from "@/components/ui/card";
 import { Flower2, Heart, Sparkles } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 import artisan from "@assets/stock_images/artisan_craftsman_wo_c30faf73.jpg";
 
 export default function BrandStory() {
+  const { ref, isVisible } = useScrollAnimation();
   const pillars = [
     {
       icon: Flower2,
@@ -22,10 +24,10 @@ export default function BrandStory() {
   ];
 
   return (
-    <section className="py-16 bg-card">
+    <section ref={ref as any} className="py-16 bg-card">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
             <h2 className="font-serif text-4xl font-bold mb-6">
               Sacred Craftsmanship, Timeless Design
             </h2>
@@ -55,12 +57,12 @@ export default function BrandStory() {
             </div>
           </div>
 
-          <div className="relative">
+          <div className={`relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
             <div className="aspect-[3/4] rounded-md overflow-hidden">
               <img
                 src={artisan}
                 alt="Artisan at work"
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
               />
             </div>
           </div>

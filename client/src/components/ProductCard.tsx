@@ -15,13 +15,13 @@ interface ProductCardProps {
 
 export default function ProductCard({ id, name, price, image, materials, category }: ProductCardProps) {
   return (
-    <Card className="group overflow-hidden hover-elevate transition-transform duration-300" data-testid={`card-product-${id}`}>
+    <Card className="group overflow-hidden hover-elevate transition-all duration-500" data-testid={`card-product-${id}`}>
       <Link href={`/product/${id}`}>
         <div className="relative aspect-[3/4] overflow-hidden bg-muted">
           <img
             src={image}
             alt={name}
-            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
             data-testid={`img-product-${id}`}
           />
           <Button

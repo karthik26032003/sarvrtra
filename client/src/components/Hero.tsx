@@ -1,10 +1,12 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import FloatingDecor from "./FloatingDecor";
 import heroImage from "@assets/stock_images/luxury_brass_diya_oi_e6113a13.jpg";
 
 export default function Hero() {
   return (
     <section className="relative h-[85vh] min-h-[600px] w-full overflow-hidden">
+      <FloatingDecor />
       <div
         className="absolute inset-0 bg-cover bg-center transition-transform ease-out hover:scale-105"
         style={{ backgroundImage: `url(${heroImage})`, transitionDuration: '3000ms' }}

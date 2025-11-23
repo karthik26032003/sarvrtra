@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import FloatingDecor from "./FloatingDecor";
 import brass1 from "@assets/stock_images/brass_home_decor_art_e5322683.jpg";
 import bronze1 from "@assets/stock_images/bronze_sculpture_hom_83c0c990.jpg";
 import wood1 from "@assets/stock_images/wooden_home_decor_ha_0877cd2f.jpg";
@@ -34,8 +35,9 @@ export default function FeaturedCollections() {
   ];
 
   return (
-    <section ref={ref as any} className="py-16 bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref as any} className="relative py-16 bg-background overflow-hidden">
+      <FloatingDecor />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="font-serif text-4xl font-bold mb-4">Shop by Material</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

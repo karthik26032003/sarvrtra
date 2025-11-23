@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Flower2, Heart, Sparkles, Users, Award, Globe } from "lucide-react";
+import FloatingDecor from "@/components/FloatingDecor";
 import artisan1 from "@assets/stock_images/artisan_craftsman_wo_c30faf73.jpg";
 import artisan2 from "@assets/stock_images/artisan_craftsman_wo_c474fee8.jpg";
 import artisan3 from "@assets/stock_images/artisan_craftsman_wo_94615177.jpg";
@@ -52,8 +53,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-16 bg-background overflow-hidden">
+        <FloatingDecor />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <h2 className="font-serif text-4xl font-bold mb-6">

@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Flower2, Heart, Sparkles } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import FloatingDecor from "./FloatingDecor";
 import artisan from "@assets/stock_images/artisan_craftsman_wo_c30faf73.jpg";
 
 export default function BrandStory() {
@@ -24,8 +25,9 @@ export default function BrandStory() {
   ];
 
   return (
-    <section ref={ref as any} className="py-16 bg-card">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={ref as any} className="relative py-16 bg-card overflow-hidden">
+      <FloatingDecor />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
             <h2 className="font-serif text-4xl font-bold mb-6">

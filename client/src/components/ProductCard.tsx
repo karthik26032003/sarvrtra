@@ -18,6 +18,15 @@ export default function ProductCard({ id, name, price, image, materials, categor
     <Card className="group overflow-hidden hover-elevate transition-all duration-500" data-testid={`card-product-${id}`}>
       <Link href={`/product/${id}`}>
         <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <svg className="absolute top-4 right-4 w-16 h-16 text-primary/40 animate-float" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="1" />
+              <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" strokeWidth="0.5" />
+            </svg>
+            <svg className="absolute bottom-4 left-4 w-12 h-12 text-accent/40 animate-float-reverse" viewBox="0 0 100 100">
+              <rect x="20" y="20" width="60" height="60" fill="none" stroke="currentColor" strokeWidth="1" rx="4" transform="rotate(45 50 50)" />
+            </svg>
+          </div>
           <img
             src={image}
             alt={name}

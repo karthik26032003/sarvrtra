@@ -1,48 +1,83 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import ProductCard from "@/components/ProductCard";
 import FilterSidebar from "@/components/FilterSidebar";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { SlidersHorizontal } from "lucide-react";
-
-import product1 from "@assets/stock_images/brass_home_decor_art_e5322683.jpg";
-import product2 from "@assets/stock_images/brass_home_decor_art_afcd04f0.jpg";
-import product3 from "@assets/stock_images/brass_home_decor_art_b9962a99.jpg";
-import product4 from "@assets/stock_images/brass_home_decor_art_e140323c.jpg";
-import product5 from "@assets/stock_images/brass_home_decor_art_a92895e9.jpg";
-import product6 from "@assets/stock_images/brass_home_decor_art_ea6d434b.jpg";
-import product7 from "@assets/stock_images/bronze_sculpture_hom_83c0c990.jpg";
-import product8 from "@assets/stock_images/bronze_sculpture_hom_9c0f1d31.jpg";
-import product9 from "@assets/stock_images/bronze_sculpture_hom_98cf7967.jpg";
-import product10 from "@assets/stock_images/wooden_home_decor_ha_0877cd2f.jpg";
-import product11 from "@assets/stock_images/wooden_home_decor_ha_f500eff1.jpg";
-import product12 from "@assets/stock_images/wooden_home_decor_ha_d6b0798c.jpg";
+import { SlidersHorizontal, Sparkles } from "lucide-react";
+import { products as allProducts, categories, materials } from "@/data/products";
 
 export default function CatalogPage() {
   const [sortBy, setSortBy] = useState("featured");
+  const [filters, setFilters] = useState<{
+    materials?: string[];
+    categories?: string[];
+    priceRange?: [number, number];
+  }>({});
 
-  const products = [
-    { id: "1", name: "Traditional Brass Diya Set", price: 2499, image: product1, materials: ["Brass", "Handcrafted"], category: "Lighting" },
-    { id: "2", name: "Ornate Brass Wall Hanging", price: 3899, image: product2, materials: ["Brass"], category: "Wall Art" },
-    { id: "3", name: "Sacred Brass Bell", price: 1799, image: product3, materials: ["Brass"], category: "Décor" },
-    { id: "4", name: "Brass Temple Lamp", price: 4299, image: product4, materials: ["Brass"], category: "Lighting" },
-    { id: "5", name: "Intricate Brass Plate", price: 2199, image: product5, materials: ["Brass"], category: "Décor" },
-    { id: "6", name: "Brass Candle Holder Set", price: 3499, image: product6, materials: ["Brass"], category: "Lighting" },
-    { id: "7", name: "Bronze Ganesha Sculpture", price: 5499, image: product7, materials: ["Bronze"], category: "Idols" },
-    { id: "8", name: "Antique Bronze Vase", price: 6899, image: product8, materials: ["Bronze"], category: "Décor" },
-    { id: "9", name: "Bronze Dancing Shiva", price: 8999, image: product9, materials: ["Bronze"], category: "Idols" },
-    { id: "10", name: "Carved Wooden Panel", price: 4599, image: product10, materials: ["Wood"], category: "Wall Art" },
-    { id: "11", name: "Wooden Jewelry Box", price: 2899, image: product11, materials: ["Wood"], category: "Décor" },
-    { id: "12", name: "Handcrafted Wooden Bowl", price: 1999, image: product12, materials: ["Wood"], category: "Décor" },
-  ];
+  // Filter and sort products
+  const filteredProducts = useMemo(() => {
+    let result = [...allProducts];
+
+    // Apply material filter
+    if (filters.materials && filters.materials.length > 0) {
+      result = result.filter(p =>
+        p.materials.some(m =>
+          filters.materials!.some(fm => m.toLowerCase().includes(fm.toLowerCase()))
+        )
+      );
+    }
+
+    // Apply category filter
+    if (filters.categories && filters.categories.length > 0) {
+      result = result.filter(p =>
+        filters.categories!.some(fc => p.category.toLowerCase() === fc.toLowerCase())
+      );
+    }
+
+    // Apply price range filter
+    if (filters.priceRange) {
+      result = result.filter(p =>
+        p.price >= filters.priceRange![0] && p.price <= filters.priceRange![1]
+      );
+    }
+
+    // Sort products
+    switch (sortBy) {
+      case "price-low":
+        result.sort((a, b) => a.price - b.price);
+        break;
+      case "price-high":
+        result.sort((a, b) => b.price - a.price);
+        break;
+      case "newest":
+        result.sort((a, b) => (b.newArrival ? 1 : 0) - (a.newArrival ? 1 : 0));
+        break;
+      case "name-az":
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "featured":
+      default:
+        result.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+        break;
+    }
+
+    return result;
+  }, [filters, sortBy]);
 
   return (
     <div className="min-h-screen">
-      <div className="bg-card border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="font-serif text-4xl font-bold mb-2">All Collections</h1>
-          <p className="text-muted-foreground">Explore our complete range of handcrafted artifacts</p>
+      {/* Hero Banner */}
+      <div className="bg-gradient-to-r from-amber-800 via-amber-700 to-yellow-700 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles className="w-5 h-5 text-amber-300" />
+            <span className="text-amber-200 text-sm tracking-wide">Handcrafted Excellence</span>
+          </div>
+          <h1 className="font-serif text-4xl sm:text-5xl font-bold mb-3">All Collections</h1>
+          <p className="text-amber-100 text-lg max-w-2xl">
+            Explore our complete range of {allProducts.length} handcrafted brass, bronze, and wood artifacts
+          </p>
         </div>
       </div>
 
@@ -50,7 +85,7 @@ export default function CatalogPage() {
         <div className="flex flex-col lg:flex-row gap-8">
           <aside className="hidden lg:block w-64 flex-shrink-0">
             <div className="sticky top-24">
-              <FilterSidebar onFilterChange={(filters) => console.log('Filters:', filters)} />
+              <FilterSidebar onFilterChange={(newFilters) => setFilters(newFilters)} />
             </div>
           </aside>
 
@@ -65,11 +100,11 @@ export default function CatalogPage() {
                     </Button>
                   </SheetTrigger>
                   <SheetContent side="left" className="w-80 overflow-y-auto">
-                    <FilterSidebar onFilterChange={(filters) => console.log('Filters:', filters)} />
+                    <FilterSidebar onFilterChange={(newFilters) => setFilters(newFilters)} />
                   </SheetContent>
                 </Sheet>
                 <p className="text-sm text-muted-foreground" data-testid="text-product-count">
-                  {products.length} products
+                  Showing {filteredProducts.length} of {allProducts.length} products
                 </p>
               </div>
 
@@ -87,11 +122,24 @@ export default function CatalogPage() {
               </Select>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product.id} {...product} />
-              ))}
-            </div>
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredProducts.map((product) => (
+                  <ProductCard key={product.id} {...product} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-16">
+                <p className="text-muted-foreground text-lg">No products match your filters.</p>
+                <Button
+                  variant="outline"
+                  className="mt-4"
+                  onClick={() => setFilters({})}
+                >
+                  Clear Filters
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </div>

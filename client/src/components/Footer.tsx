@@ -8,7 +8,7 @@ import Logo from "./Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t bg-card relative overflow-hidden">
+    <footer className="border-t bg-card relative overflow-hidden safe-area-inset-bottom">
       {/* Decorative background pattern */}
       <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03]">
         <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">

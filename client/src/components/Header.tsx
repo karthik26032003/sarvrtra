@@ -162,16 +162,58 @@ export default function Header() {
         )}
 
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t py-4">
-            <nav className="flex flex-col gap-2">
-              <Link href="/catalog" data-testid="link-catalog-mobile">
-                <Button variant="ghost" className="w-full justify-start">All Collections</Button>
+          <div className="lg:hidden border-t py-4 max-h-[70vh] overflow-y-auto">
+            <nav className="flex flex-col gap-1">
+              {/* Shop by Material */}
+              <div className="px-3 py-2">
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Shop by Material</span>
+              </div>
+              <div className="grid grid-cols-2 gap-1 px-2 mb-2">
+                {categories.material.map((item) => (
+                  <Link
+                    key={item}
+                    href={`/catalog?material=${item.toLowerCase()}`}
+                    data-testid={`link-material-mobile-${item.toLowerCase().replace(/\s+/g, '-')}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Button variant="ghost" size="sm" className="w-full justify-start text-sm h-10 touch-manipulation">
+                      {item}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Shop by Room */}
+              <div className="px-3 py-2">
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Shop by Room</span>
+              </div>
+              <div className="grid grid-cols-2 gap-1 px-2 mb-2">
+                {categories.room.map((item) => (
+                  <Link
+                    key={item}
+                    href={`/catalog?room=${item.toLowerCase()}`}
+                    data-testid={`link-room-mobile-${item.toLowerCase().replace(/\s+/g, '-')}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Button variant="ghost" size="sm" className="w-full justify-start text-sm h-10 touch-manipulation">
+                      {item}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className="border-t my-2" />
+
+              {/* Main Links */}
+              <Link href="/catalog" data-testid="link-catalog-mobile" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start h-12 touch-manipulation">All Collections</Button>
               </Link>
-              <Link href="/about" data-testid="link-about-mobile">
-                <Button variant="ghost" className="w-full justify-start">About</Button>
+              <Link href="/about" data-testid="link-about-mobile" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start h-12 touch-manipulation">About</Button>
               </Link>
-              <Link href="/contact" data-testid="link-contact-mobile">
-                <Button variant="ghost" className="w-full justify-start">Contact</Button>
+              <Link href="/contact" data-testid="link-contact-mobile" onClick={() => setMobileMenuOpen(false)}>
+                <Button variant="ghost" className="w-full justify-start h-12 touch-manipulation">Contact</Button>
               </Link>
             </nav>
           </div>

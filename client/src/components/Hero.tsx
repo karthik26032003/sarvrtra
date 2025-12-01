@@ -144,12 +144,12 @@ export default function Hero() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative h-[90vh] min-h-[700px] w-full overflow-hidden">
-      {/* Decorative Elements */}
-      <div ref={decorRef} className="absolute inset-0 pointer-events-none z-10">
-        <MandalaPattern className="mandala-1 absolute top-10 right-10 w-32 h-32 text-amber-400/30 dark:text-amber-300/20" />
-        <MandalaPattern className="mandala-2 absolute bottom-20 left-10 w-24 h-24 text-amber-500/25 dark:text-amber-400/15" />
-        <DiamondPattern className="diamond-1 absolute top-1/3 right-1/4 w-16 h-16 text-amber-300/20" />
+    <section ref={containerRef} className="relative h-[100svh] min-h-[600px] sm:min-h-[700px] w-full overflow-hidden">
+      {/* Decorative Elements - hidden on small mobile for performance */}
+      <div ref={decorRef} className="absolute inset-0 pointer-events-none z-10 hidden sm:block">
+        <MandalaPattern className="mandala-1 absolute top-10 right-10 w-24 md:w-32 h-24 md:h-32 text-amber-400/30 dark:text-amber-300/20" />
+        <MandalaPattern className="mandala-2 absolute bottom-20 left-10 w-20 md:w-24 h-20 md:h-24 text-amber-500/25 dark:text-amber-400/15" />
+        <DiamondPattern className="diamond-1 absolute top-1/3 right-1/4 w-12 md:w-16 h-12 md:h-16 text-amber-300/20" />
       </div>
 
       {/* Background Image with Parallax */}
@@ -178,7 +178,7 @@ export default function Hero() {
 
           <h1
             ref={titleRef}
-            className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 leading-[1.1] tracking-tight"
+            className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 sm:mb-6 leading-[1.1] tracking-tight"
           >
             <span className="block">Where Tradition</span>
             <span className="block bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">
@@ -188,44 +188,44 @@ export default function Hero() {
 
           <p
             ref={subtitleRef}
-            className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-2xl leading-relaxed font-light"
+            className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/85 mb-6 sm:mb-10 max-w-2xl leading-relaxed font-light"
           >
             Discover exquisite handcrafted artifacts in brass, bronze, and wood. Each piece celebrates Hindu spirituality and timeless artisan craftsmanship.
           </p>
 
-          <div ref={buttonsRef} className="flex flex-wrap gap-4">
-            <Link href="/catalog" data-testid="link-hero-shop">
+          <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Link href="/catalog" data-testid="link-hero-shop" className="w-full sm:w-auto">
               <Button
                 size="lg"
-                className="text-base px-8 py-6 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white border-0 shadow-lg shadow-amber-900/30 group"
+                className="w-full sm:w-auto text-base px-6 sm:px-8 py-5 sm:py-6 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 active:from-amber-700 active:to-amber-800 text-white border-0 shadow-lg shadow-amber-900/30 group touch-manipulation"
               >
                 Explore Collections
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
-            <Link href="/about" data-testid="link-hero-about">
+            <Link href="/about" data-testid="link-hero-about" className="w-full sm:w-auto">
               <Button
                 size="lg"
                 variant="outline"
-                className="text-base px-8 py-6 bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/15 hover:border-white/40 transition-all duration-300"
+                className="w-full sm:w-auto text-base px-6 sm:px-8 py-5 sm:py-6 bg-white/5 backdrop-blur-md text-white border-white/20 hover:bg-white/15 active:bg-white/25 hover:border-white/40 transition-all duration-300 touch-manipulation"
               >
                 Our Story
               </Button>
             </Link>
           </div>
 
-          {/* Trust indicators */}
-          <div className="mt-12 flex items-center gap-8 text-white/60 text-sm">
+          {/* Trust indicators - responsive grid for mobile */}
+          <div className="mt-8 sm:mt-12 grid grid-cols-1 sm:flex sm:flex-wrap items-start sm:items-center gap-3 sm:gap-8 text-white/60 text-xs sm:text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-amber-500" />
+              <div className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" />
               <span>100% Handcrafted</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-amber-500" />
+              <div className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" />
               <span>Premium Materials</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-amber-500" />
+              <div className="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0" />
               <span>Artisan Made</span>
             </div>
           </div>
